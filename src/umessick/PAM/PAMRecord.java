@@ -10,6 +10,9 @@ package umessick.PAM;
  * @author uam65345
  */
 public class PAMRecord {
-    String number;
-    String title;
+    String date;
+    String activity;
+    String value;
+    String description;
+    String comment;
 }
