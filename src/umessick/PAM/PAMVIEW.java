@@ -6,15 +6,9 @@
 package umessick.PAM;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -47,6 +41,16 @@ public class PAMVIEW extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_JSON = new javax.swing.JTextArea();
         btn_JSON = new javax.swing.JButton();
+        btn_LoadData = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_Records = new javax.swing.JTable();
+        tbl_Activity_Three = new javax.swing.JTabbedPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_Activity_One = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbl_Activity_Two = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
 
         jLabel3.setText("jLabel3");
 
@@ -69,6 +73,13 @@ public class PAMVIEW extends javax.swing.JFrame {
             }
         });
 
+        btn_LoadData.setText("Load Data");
+        btn_LoadData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LoadDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Record_jPanelLayout = new javax.swing.GroupLayout(Record_jPanel);
         Record_jPanel.setLayout(Record_jPanelLayout);
         Record_jPanelLayout.setHorizontalGroup(
@@ -79,9 +90,11 @@ public class PAMVIEW extends javax.swing.JFrame {
                     .addGroup(Record_jPanelLayout.createSequentialGroup()
                         .addComponent(lb_JSON)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Record_jPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_LoadData)
+                        .addGap(35, 35, 35)
                         .addComponent(btn_JSON)))
                 .addContainerGap())
         );
@@ -93,17 +106,83 @@ public class PAMVIEW extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_JSON)
+                .addGroup(Record_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_JSON)
+                    .addComponent(btn_LoadData))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jTable_Records.setAutoCreateRowSorter(true);
+        jTable_Records.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable_Records);
+
+        tbl_Activity_One.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tbl_Activity_One);
+
+        tbl_Activity_Three.addTab("Activity One", jScrollPane3);
+
+        tbl_Activity_Two.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tbl_Activity_Two);
+
+        tbl_Activity_Three.addTab("Activity Two", jScrollPane4);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable3);
+
+        tbl_Activity_Three.addTab("Activity Three", jScrollPane5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Record_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Record_jPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(tbl_Activity_Three, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,7 +190,11 @@ public class PAMVIEW extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Record_jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tbl_Activity_Three, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,6 +203,39 @@ public class PAMVIEW extends javax.swing.JFrame {
     private void btn_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_JSONActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_JSONActionPerformed
+
+    private void btn_LoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadDataActionPerformed
+        PAMRecord rec = new PAMRecord();
+        rec.date = "10/10/2013";
+        rec.activity = "Running";
+        rec.value = "2";
+        rec.description = "This is something";
+        rec.comment = "Comment";
+       
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("date");
+        model.addColumn("activity");
+        model.addColumn("value");
+        model.addColumn("description");
+        model.addColumn("comment");
+        
+        
+        for(int i = 0;i<20;i++) {
+            model.insertRow(0, new Object[]{
+                rec.date,
+                rec.activity,
+                rec.value,
+                rec.description,
+                rec.comment
+            });   
+        }
+        
+        
+      
+        
+        jTable_Records.setModel(model);
+        tbl_Activity_One.setModel(model);
+    }//GEN-LAST:event_btn_LoadDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,16 +270,91 @@ public class PAMVIEW extends javax.swing.JFrame {
                 new PAMVIEW().setVisible(true);
             }
         });
+        
+//        try(Reader reader = new InputStreamReader(PAMVIEW.class.getResourceAsStream("/json/data.json"), "UTF-8")) {
+//            Gson gson = new GsonBuilder().create();
+//            PAMRecord p = gson.fromJson(reader, PAMRecord.class);
+//            System.out.println(p);
+//        } catch (Exception e) {
+//            System.out.print("ERROR :: " + e.getMessage());
+//        }
+        
+        PAMRecord rec = new PAMRecord();
+        rec.date = "10/10/2013";
+        rec.activity = "Running";
+        rec.value = "2";
+        rec.description = "This is something";
+        rec.comment = "Comment";
+        Gson gson = new Gson();
+        String json = gson.toJson(rec); 
+        System.out.println(json);
+        
+        PAMRecord[] recs = {rec,rec,rec,rec};
+        String json2 = gson.toJson(recs);
+        System.out.println(json2);
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("date");
+        model.addColumn("activity");
+        model.addColumn("value");
+        model.addColumn("description");
+        model.addColumn("comment");
+        
+        
+        model.insertRow(0, new Object[]{
+            rec.date,
+            rec.activity,
+            rec.value,
+            rec.description,
+            rec.comment
+        });
+        
+        
+        
+//         DefaultTableModel model = new DefaultTableModel();
+//            JTable table = new JTable(model);
+//            model.addColumn("ID");
+//            model.addColumn("First Name");
+//            model.addColumn("Last Name");
+//
+//
+//            while (res.next()) {
+//                if (res.wasNull()) {
+//                    //-- ADD RECORDSET DATA TO JTABLE MODEL
+//                    model.insertRow(0, new Object[]{
+//                                res.getString("Id"),
+//                                res.getString("firstName"),
+//                                res.getString("lastName")
+//                            });
+//
+//                }
+//
+//            }
+//            //-- ADD THIS MODEL TO THE JTABLE
+//            tbl_Results.setModel(model);
+        
+       
+        
     }
-    
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Record_jPanel;
     private javax.swing.JButton btn_JSON;
+    private javax.swing.JButton btn_LoadData;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable_Records;
     private javax.swing.JLabel lb_JSON;
     private javax.swing.JTextArea tb_JSON;
+    private javax.swing.JTable tbl_Activity_One;
+    private javax.swing.JTabbedPane tbl_Activity_Three;
+    private javax.swing.JTable tbl_Activity_Two;
     // End of variables declaration//GEN-END:variables
 }
 
