@@ -30,9 +30,13 @@ public class ActivityLog extends javax.swing.JFrame {
         rec.description = "This is something";
         rec.comment = "Comment";      
         
-        Object[][] dataEntries = new Object[50][5];
+        Object[][] dataEntries = new Object[21][5];
         
-        for(int i = 0;i<20;i++) {            
+        
+       
+        EditableTableModel model = new EditableTableModel(columnTitles);  
+        
+        for(int i = 0;i<10;i++) {            
             Object[] record = new Object[]{
                 rec.date,
                 rec.activity,
@@ -40,10 +44,8 @@ public class ActivityLog extends javax.swing.JFrame {
                 rec.description,
                 rec.comment
             };            
-            dataEntries[i] = record;  
+            model.insertRow(record);
         }
-       
-        TableModel model = new EditableTableModel(columnTitles, dataEntries);     
         
         
         jTable_log.setModel(model);
@@ -52,10 +54,6 @@ public class ActivityLog extends javax.swing.JFrame {
         String[] bloodGroups = { "Sleep", "Work", "School"};
         JComboBox comboBox = new JComboBox(bloodGroups);
         jTable_log.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(comboBox));
-        
-        
-      
-        
     }
 
     /**
@@ -146,13 +144,17 @@ public class ActivityLog extends javax.swing.JFrame {
         rec.description = "This is something";
         rec.comment = "Comment";
 
-        Object[] row = { rec.date, rec.activity, rec.value, rec.description, rec.comment };
         EditableTableModel model = (EditableTableModel) jTable_log.getModel();
-        System.out.print(model.getRowCount());
-        model.dataEntries[15] = row;
-        model.dataEntries[16] = row;
-         
-    
+        
+        Object[] record = new Object[]{
+            rec.date,
+            rec.activity,
+            rec.value,
+            rec.description,
+            rec.comment
+        };            
+        model.insertRow(record);
+        jTable_log.setModel(model);
     }//GEN-LAST:event_btn_addActivityActionPerformed
 
     /**

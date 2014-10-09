@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package umessick.PAM;
-//http://www.java2s.com/Tutorial/Java/0240__Swing/DemonstratestheeditablepropertyofSwingtables.htm
+// http://www.java2s.com/Tutorial/Java/0240__Swing/DemonstratestheeditablepropertyofSwingtables.htm
+// http://stackoverflow.com/questions/12348932/change-background-color-of-one-cell-in-jtable/12352838#12352838
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -13,23 +16,23 @@ import javax.swing.table.AbstractTableModel;
  * @author uam65345
  */
 class EditableTableModel extends AbstractTableModel {
+  private List<Object[]> rows =new ArrayList<Object[]>();
+    
   String[] columnTitles;
-
-  Object[][] dataEntries;
-
+  //Object[][] dataEntries;
   int rowCount;
 
-  public EditableTableModel(String[] columnTitles, Object[][] dataEntries) {
-    this.columnTitles = columnTitles;
-    this.dataEntries = dataEntries;
-  }
+//  public EditableTableModel(String[] columnTitles, Object[][] dataEntries) {
+//    this.columnTitles = columnTitles;
+//    this.dataEntries = dataEntries;
+//  }
   
   public EditableTableModel(String[] columnTitles) {
     this.columnTitles = columnTitles;
   }
 
   public int getRowCount() {
-    return dataEntries.length;
+    return rows.size();
   }
 
   public int getColumnCount() {
@@ -37,7 +40,7 @@ class EditableTableModel extends AbstractTableModel {
   }
 
   public Object getValueAt(int row, int column) {
-    return dataEntries[row][column];
+    return rows.get(row)[column];
   }
 
   public String getColumnName(int column) {
@@ -53,7 +56,12 @@ class EditableTableModel extends AbstractTableModel {
   }
 
   public void setValueAt(Object value, int row, int column) {
-    dataEntries[row][column] = value;
+    rows.get(row)[column] = value;
+  }
+  
+  public void insertRow(Object[] rec) {
+      rows.add(rec);
+      this.fireTableDataChanged();
   }
  
 }
