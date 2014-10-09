@@ -117,7 +117,9 @@ public class PAMHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_activity_logActionPerformed
 
     private void btn_daily_logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_daily_logActionPerformed
-        // TODO add your handling code here:
+        DailyReport frame = new DailyReport();
+        frame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_daily_logActionPerformed
 
     private void btn_weekly_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_weekly_reportActionPerformed
