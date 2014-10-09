@@ -5,7 +5,10 @@
  */
 package umessick.PAM;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -19,32 +22,40 @@ public class ActivityLog extends javax.swing.JFrame {
     public ActivityLog() {
         initComponents();
         
+        String[] columnTitles = { "Date", "Activity", "Value", "description", "Comment" };
         PAMRecord rec = new PAMRecord();
         rec.date = "10/10/2013";
         rec.activity = "Running";
         rec.value = "2";
         rec.description = "This is something";
-        rec.comment = "Comment";
-       
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("date");
-        model.addColumn("activity");
-        model.addColumn("value");
-        model.addColumn("description");
-        model.addColumn("comment");
+        rec.comment = "Comment";      
         
+        Object[][] dataEntries = new Object[50][5];
         
-        for(int i = 0;i<20;i++) {
-            model.insertRow(0, new Object[]{
+        for(int i = 0;i<20;i++) {            
+            Object[] record = new Object[]{
                 rec.date,
                 rec.activity,
                 rec.value,
                 rec.description,
                 rec.comment
-            });   
+            };            
+            dataEntries[i] = record;  
         }
-               
+       
+        TableModel model = new EditableTableModel(columnTitles, dataEntries);     
+        
+        
         jTable_log.setModel(model);
+        jTable_log.createDefaultColumnsFromModel();
+        
+        String[] bloodGroups = { "Sleep", "Work", "School"};
+        JComboBox comboBox = new JComboBox(bloodGroups);
+        jTable_log.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(comboBox));
+        
+        
+      
+        
     }
 
     /**
@@ -135,9 +146,13 @@ public class ActivityLog extends javax.swing.JFrame {
         rec.description = "This is something";
         rec.comment = "Comment";
 
-    Object[] row = { rec.date, rec.activity, rec.value, rec.description, rec.comment };
-    DefaultTableModel model = (DefaultTableModel) jTable_log.getModel();
-    model.addRow(row);
+        Object[] row = { rec.date, rec.activity, rec.value, rec.description, rec.comment };
+        EditableTableModel model = (EditableTableModel) jTable_log.getModel();
+        System.out.print(model.getRowCount());
+        model.dataEntries[15] = row;
+        model.dataEntries[16] = row;
+         
+    
     }//GEN-LAST:event_btn_addActivityActionPerformed
 
     /**
