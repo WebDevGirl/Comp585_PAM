@@ -5,10 +5,18 @@
  */
 package umessick.PAM;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -23,16 +31,21 @@ public class ActivityLog extends javax.swing.JFrame {
         initComponents();
         
         String[] columnTitles = { "Date", "Activity", "Value", "description", "Comment" };
+        
+        try(Reader reader = new InputStreamReader(PAMVIEW.class.getResourceAsStream("/json/ursula/data.json"), "UTF-8")) {
+            Gson gson = new GsonBuilder().create();
+            PAMRecord p = gson.fromJson(reader, PAMRecord.class);
+            System.out.println(p);
+        } catch (Exception e) {
+            System.out.print("ERROR :: " + e.getMessage());
+        }
+        
         PAMRecord rec = new PAMRecord();
         rec.date = "10/10/2013";
         rec.activity = "Running";
         rec.value = "2";
         rec.description = "This is something";
         rec.comment = "Comment";      
-        
-        Object[][] dataEntries = new Object[21][5];
-        
-        
        
         EditableTableModel model = new EditableTableModel(columnTitles);  
         
@@ -46,14 +59,28 @@ public class ActivityLog extends javax.swing.JFrame {
             };            
             model.insertRow(record);
         }
-        
-        
+                
         jTable_log.setModel(model);
         jTable_log.createDefaultColumnsFromModel();
         
+        /* Format Date */
+        try {
+            JFormattedTextField tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
+            MaskFormatter dateMask = new MaskFormatter("##/##/####");
+            dateMask.install(tf);
+            jTable_log.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(tf));
+        } catch (ParseException ex) {
+            System.out.print("error");
+        }
+            
+        
+        /* Format Drop Down */
         String[] bloodGroups = { "Sleep", "Work", "School"};
         JComboBox comboBox = new JComboBox(bloodGroups);
         jTable_log.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(comboBox));
+        
+        jTable_log.setRowHeight(25);
+        jTable_log.repaint();
     }
 
     /**
@@ -69,6 +96,8 @@ public class ActivityLog extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_log = new javax.swing.JTable();
         btn_addActivity = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        btn_nav_home = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +123,32 @@ public class ActivityLog extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        btn_nav_home.setText("Home");
+        btn_nav_home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nav_homeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_nav_home)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(btn_nav_home)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jp_ActivityLayout = new javax.swing.GroupLayout(jp_Activity);
         jp_Activity.setLayout(jp_ActivityLayout);
         jp_ActivityLayout.setHorizontalGroup(
@@ -102,8 +157,9 @@ public class ActivityLog extends javax.swing.JFrame {
                 .addGroup(jp_ActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jp_ActivityLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
-                    .addComponent(btn_addActivity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
+                    .addComponent(btn_addActivity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jp_ActivityLayout.setVerticalGroup(
@@ -113,7 +169,9 @@ public class ActivityLog extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_addActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,7 +185,7 @@ public class ActivityLog extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jp_Activity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -137,25 +195,25 @@ public class ActivityLog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActivityActionPerformed
-      PAMRecord rec = new PAMRecord();
-        rec.date = "10/10/2013";
-        rec.activity = "Walking";
-        rec.value = "4";
-        rec.description = "This is something";
-        rec.comment = "Comment";
-
         EditableTableModel model = (EditableTableModel) jTable_log.getModel();
         
+        /* Add Blank Object */
         Object[] record = new Object[]{
-            rec.date,
-            rec.activity,
-            rec.value,
-            rec.description,
-            rec.comment
+            "",
+            "",
+            "",
+            "",
+            ""
         };            
         model.insertRow(record);
-        jTable_log.setModel(model);
+        jTable_log.setModel(model);       
     }//GEN-LAST:event_btn_addActivityActionPerformed
+
+    private void btn_nav_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nav_homeActionPerformed
+        PAMHome frame = new PAMHome();
+        frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_nav_homeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,8 +252,11 @@ public class ActivityLog extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addActivity;
+    private javax.swing.JButton btn_nav_home;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_log;
     private javax.swing.JPanel jp_Activity;
+    private javax.swing.JPanel jp_navigation;
     // End of variables declaration//GEN-END:variables
 }
