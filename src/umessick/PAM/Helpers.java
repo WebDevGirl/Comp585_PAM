@@ -5,16 +5,19 @@
  */
 package umessick.PAM;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  *
  * @author uam65345
  */
-public class PAMRecord {
-    Date date;
-    String activity;
-    String value;
-    String description;
-    String comment;
+public class Helpers {
+    
+    public static Date getDate(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar.getTime();
+    }
+    
 }

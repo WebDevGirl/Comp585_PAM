@@ -7,6 +7,8 @@ package umessick.PAM;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -206,7 +208,7 @@ public class PAMVIEW extends javax.swing.JFrame {
 
     private void btn_LoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoadDataActionPerformed
         PAMRecord rec = new PAMRecord();
-        rec.date = "10/10/2013";
+        rec.date = Helpers.getDate(1977, 7, 17);
         rec.activity = "Running";
         rec.value = "2";
         rec.description = "This is something";
@@ -278,9 +280,9 @@ public class PAMVIEW extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //            System.out.print("ERROR :: " + e.getMessage());
 //        }
-        
+       
         PAMRecord rec = new PAMRecord();
-        rec.date = "10/10/2013";
+        rec.date = Helpers.getDate(1977, 7, 17);
         rec.activity = "Running";
         rec.value = "2";
         rec.description = "This is something";

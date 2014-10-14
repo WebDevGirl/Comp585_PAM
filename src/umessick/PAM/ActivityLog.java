@@ -11,12 +11,15 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
+
 
 /**
  *
@@ -41,7 +44,7 @@ public class ActivityLog extends javax.swing.JFrame {
         }
         
         PAMRecord rec = new PAMRecord();
-        rec.date = "10/10/2013";
+        rec.date = Helpers.getDate(1982, 11, 16);
         rec.activity = "Running";
         rec.value = "2";
         rec.description = "This is something";
@@ -53,8 +56,8 @@ public class ActivityLog extends javax.swing.JFrame {
             Object[] record = new Object[]{
                 rec.date,
                 rec.activity,
-                rec.value,
-                rec.description,
+                rec.value, 
+               rec.description,
                 rec.comment
             };            
             model.insertRow(record);
@@ -64,16 +67,17 @@ public class ActivityLog extends javax.swing.JFrame {
         jTable_log.createDefaultColumnsFromModel();
         
         /* Format Date */
-        try {
-            JFormattedTextField tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
-            MaskFormatter dateMask = new MaskFormatter("##/##/####");
-            dateMask.install(tf);
-            jTable_log.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(tf));
-        } catch (ParseException ex) {
-            System.out.print("error");
-        }
-            
+//        try {
+//            JFormattedTextField tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
+//            MaskFormatter dateMask = new MaskFormatter("##/##/####");
+//            dateMask.install(tf);
+//            jTable_log.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(tf));
+//        } catch (ParseException ex) {
+//            System.out.print("error");
+//        }
         
+        jTable_log.getColumnModel().getColumn(0).setCellEditor(new DateTableCellEditor());
+                    
         /* Format Drop Down */
         String[] bloodGroups = { "Sleep", "Work", "School"};
         JComboBox comboBox = new JComboBox(bloodGroups);
@@ -199,7 +203,7 @@ public class ActivityLog extends javax.swing.JFrame {
         
         /* Add Blank Object */
         Object[] record = new Object[]{
-            "",
+            new Date(),
             "",
             "",
             "",
@@ -259,4 +263,4 @@ public class ActivityLog extends javax.swing.JFrame {
     private javax.swing.JPanel jp_Activity;
     private javax.swing.JPanel jp_navigation;
     // End of variables declaration//GEN-END:variables
-}
+ }

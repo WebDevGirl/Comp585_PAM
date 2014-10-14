@@ -5,6 +5,8 @@
  */
 package umessick.PAM;
 
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +22,7 @@ public class DailyReport extends javax.swing.JFrame {
         initComponents();
         
         PAMRecord rec = new PAMRecord();
-        rec.date = "10/10/2013";
+        rec.date = getDate(1977, 7, 17);
         rec.activity = "Sleeping";
         rec.value = "1";
         rec.description = "This is something";
@@ -271,4 +273,10 @@ public class DailyReport extends javax.swing.JFrame {
     private javax.swing.JTable jTable_Sleep;
     private javax.swing.JPanel jp_main;
     // End of variables declaration//GEN-END:variables
+
+    private Date getDate(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar.getTime();
+    }
 }
