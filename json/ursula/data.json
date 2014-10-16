@@ -1,57 +1,23 @@
-{
-  "work": [
+[
     {
-      "date": "10/01/2014",
+      "date_str": "10/01/2014",
       "activity": "ETD",
       "value": "4",
       "description": "Deployment Script",
       "comment": "Comment"
     },
     {
-      "date": "10/01/2014",
+      "date_str": "10/02/2014",
       "activity": "EAS",
       "value": "2",
       "description": "Code Reviews",
       "comment": "Comment"
     },
     {
-      "date": "12/10/2013",
+      "date_str": "12/10/2013",
       "activity": "Running 3",
       "value": "2",
       "description": "This is something",
       "comment": "Comment"
     }
-  ],
-  "school": [
-    {
-      "date": "10/04/2014",
-      "activity": "Comp 322",
-      "value": "2",
-      "description": "Went to class",
-      "comment": "Comment"
-    },
-    {
-      "date": "10/04/2014",
-      "activity": "Comp 322",
-      "value": "2",
-      "description": "Went to lab",
-      "comment": "Comment"
-    }
-  ],
-  "sleep": [
-    {
-      "date": "10/02/2014",
-      "activity": "Sleep",
-      "value": "6",
-      "description": "Sleeping",
-      "comment": "Comment"
-    },
-    {
-      "date": "10/03/2014",
-      "activity": "Sleep",
-      "value": "7",
-      "description": "Sleeping",
-      "comment": "Comment"
-    }
   ]
-}

@@ -7,12 +7,16 @@ package umessick.PAM;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -35,13 +39,28 @@ public class ActivityLog extends javax.swing.JFrame {
         
         String[] columnTitles = { "Date", "Activity", "Value", "description", "Comment" };
         
-        try(Reader reader = new InputStreamReader(PAMVIEW.class.getResourceAsStream("/json/ursula/data.json"), "UTF-8")) {
-            Gson gson = new GsonBuilder().create();
-            PAMRecord p = gson.fromJson(reader, PAMRecord.class);
-            System.out.println(p);
-        } catch (Exception e) {
-            System.out.print("ERROR :: " + e.getMessage());
-        }
+//        try {
+//            Gson gson = new Gson();
+//            PAMRecord[] pamList = gson.fromJson(new FileReader("json/ursula/data.json"), PAMRecord[].class);
+//            for(Iterator<PAMRecord> i = pamList.iterator(); i.hasNext(); ) {
+//                String item = i.next();
+//                System.out.println(item);
+//            }
+//
+//
+//        } catch (Exception e) {
+//            System.out.print("ERROR :: " + e.getMessage());
+//        }
+       
+
+        
+//        try(Reader reader = new InputStreamReader(PAMVIEW.class.getResourceAsStream("/json/ursula/data.json"), "UTF-8")) {
+//            Gson gson = new GsonBuilder().create();
+//            PAMRecord p = gson.fromJson(reader, PAMRecord.class);
+//            System.out.println(p);
+//        } catch (Exception e) {
+//            System.out.print("ERROR :: " + e.getMessage());
+//        }
         
         PAMRecord rec = new PAMRecord();
         rec.date = Helpers.getDate(1982, 11, 16);
@@ -67,15 +86,6 @@ public class ActivityLog extends javax.swing.JFrame {
         jTable_log.createDefaultColumnsFromModel();
         
         /* Format Date */
-//        try {
-//            JFormattedTextField tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
-//            MaskFormatter dateMask = new MaskFormatter("##/##/####");
-//            dateMask.install(tf);
-//            jTable_log.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(tf));
-//        } catch (ParseException ex) {
-//            System.out.print("error");
-//        }
-        
         jTable_log.getColumnModel().getColumn(0).setCellEditor(new DateTableCellEditor());
                     
         /* Format Drop Down */

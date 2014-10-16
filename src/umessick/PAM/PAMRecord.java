@@ -5,6 +5,8 @@
  */
 package umessick.PAM;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,8 +15,12 @@ import java.util.Date;
  */
 public class PAMRecord {
     Date date;
+    String date_str;
     String activity;
     String value;
     String description;
     String comment;
+    
+    public PAMRecord() {
+    }
 }
